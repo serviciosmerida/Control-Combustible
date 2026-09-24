@@ -4,8 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Control de Combustible · Servigrúas Mérida.</title>
-<link rel="icon" type="image/png" sizes="512x512" href="logo2.png">
-<link rel="apple-touch-icon" sizes="512x512" href="logo2.png">
+<link rel="icon" type="image/png" sizes="512x512" href="logogas.png">
+<link rel="apple-touch-icon" sizes="512x512" href="logogas.png">
+<link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#1A1A1A">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -99,9 +100,12 @@
 <body>
 
 <div class="topbar">
-  <div class="topbar-left">
-    <div class="topbar-brand">Servigrúas <span>Mérida</span></div>
-    <div class="topbar-sub">Control de combustible</div>
+  <div class="topbar-left" style="display:flex; align-items:center; gap:10px;">
+    <img src="logogas.png" alt="Logo" style="height:36px; width:auto; border-radius:6px;">
+    <div>
+      <div class="topbar-brand">Servigrúas <span>Mérida</span></div>
+      <div class="topbar-sub">Control de combustible</div>
+    </div>
   </div>
   <button class="btn-theme" id="btnTheme" onclick="toggleTheme()" title="Cambiar modo">🌙</button>
 </div>
@@ -170,7 +174,6 @@
 <div class="toast" id="toast"></div>
 
 <script>
-// URL del Web App de Apps Script configurada
 const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwyIFEZAS3D0DodDCQ5VoKMHirmBg88ifgwwc_j0q6VKg21Bgq5PPeDABlmR-v2EBUI7Q/exec';
 
 const form       = document.getElementById('form');
