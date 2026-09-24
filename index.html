@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Control de Combustible · Servigrúas Mérida</title>
+<title>Control de Combustible · Servigrúas Mérida.</title>
 <link rel="icon" type="image/png" sizes="512x512" href="logogas.png">
 <link rel="apple-touch-icon" sizes="512x512" href="logogas.png">
 <link rel="manifest" href="manifest.json">
@@ -119,24 +119,20 @@
       <input type="date" id="fecha" required>
     </div>
     <div class="field">
-      <label>No. Placa <span class="req">*</span></label>
+      <label>No. Placa / Grúa <span class="req">*</span></label>
       <select id="placa" required>
         <option value="">Selecciona...</option>
-        <option>C621BRK</option>
-        <option>C544BVM</option>
-        <option>C903BSX</option>
-        <option>C301BXY</option>
-        <option>C765CBV</option>
-        <option>C792BRD</option>
-        <option>VIALES</option>
-        <option>TAXI OSMAR</option>
-        <option>TAXI OLIVER</option>
-        <option>TAXI EDGAR</option>
+        <option value="C621BRK">C621BRK</option>
+        <option value="C544BVM">C544BVM</option>
+        <option value="C903BSX">C903BSX</option>
+        <option value="C301BXY">C301BXY</option>
+        <option value="C765CBV">C765CBV</option>
+        <option value="C792BRD">C792BRD</option>
       </select>
     </div>
     <div class="field">
       <label>Conductor <span class="req">*</span></label>
-      <input type="text" id="conductor" placeholder="Ej. Douglas" required>
+      <input type="text" id="conductor" placeholder="Nombre del piloto" required>
     </div>
   </div>
 
@@ -176,12 +172,34 @@
 <script>
 const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwyIFEZAS3D0DodDCQ5VoKMHirmBg88ifgwwc_j0q6VKg21Bgq5PPeDABlmR-v2EBUI7Q/exec';
 
+// Relación de Placa -> Conductor asignado por defecto
+const PILOTOS_POR_PLACA = {
+  'C621BRK': 'Osmar&Oliver',
+  'C544BVM': 'Alvaro',
+  'C903BSX': 'Douglas',
+  'C301BXY': 'Osmar',
+  'C765CBV': 'Aldrin',
+  'C792BRD': 'Oliver'
+};
+
 const form       = document.getElementById('form');
 const btnGuardar = document.getElementById('btnGuardar');
 const toast      = document.getElementById('toast');
 const galones    = document.getElementById('galones');
 const precio     = document.getElementById('precio');
 const total      = document.getElementById('total');
+const placaSelect= document.getElementById('placa');
+const conductorIn= document.getElementById('conductor');
+
+// Autocompletar conductor según la placa seleccionada
+placaSelect.addEventListener('change', () => {
+  const placaSeleccionada = placaSelect.value;
+  if (PILOTOS_POR_PLACA[placaSeleccionada]) {
+    conductorIn.value = PILOTOS_POR_PLACA[placaSeleccionada];
+  } else {
+    conductorIn.value = '';
+  }
+});
 
 function setFechaHoy() {
   const hoy = new Date();
@@ -240,8 +258,8 @@ form.addEventListener('submit', async (e) => {
     fecha:     fechaVal,
     mes:       MESES[fechaObj.getMonth()],
     anio:      fechaObj.getFullYear(),
-    placa:     document.getElementById('placa').value,
-    conductor: document.getElementById('conductor').value.trim(),
+    placa:     placaSelect.value,
+    conductor: conductorIn.value.trim(),
     galones:   g,
     precio:    p,
     total:     Math.round(g * p * 100) / 100,
