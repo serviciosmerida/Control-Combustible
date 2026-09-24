@@ -1,0 +1,24 @@
+{
+  "id": "/Control-Combustible/combustible-app",
+  "name": "Combustible · Servigrúas Mérida",
+  "short_name": "Combustible",
+  "description": "Control de Combustible",
+  "start_url": "/Control-Combustible/index.html",
+  "display": "standalone",
+  "background_color": "#F7F5F0",
+  "theme_color": "#1A1A1A",
+  "icons": [
+    {
+      "src": "logogas.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "logogas.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
